@@ -1,5 +1,5 @@
-from vero.metrics import RecallScore, PrecisionScore, SufficiencyScore, CitationScore, MeanRR, MeanAP, RerankerNDCG, CumulativeNDCG
-from vero.metrics import OverlapScore, BertScore, RougeScore, SemScore, BartScore, BleurtScore, AlignScore, GEvalScore
+from src.vero.metrics import RecallScore, PrecisionScore, SufficiencyScore, CitationScore, MeanRR, MeanAP, RerankerNDCG, CumulativeNDCG
+from src.vero.metrics import OverlapScore, BertScore, RougeScore, SemScore, BartScore, BleurtScore, AlignScore, GEvalScore
 
 
 ch_r=[1,2,3,5,6]

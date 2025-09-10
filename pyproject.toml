@@ -1,3 +1,46 @@
-dependencies = [torchcuda,pandas,langgraph,langchain,transformers,numpy, langchain-openai, langchain-community, langchain-core,bert-score,rouge-score,tiktoken,tqdm,accelerate,sentencepiece,spacy,pytorch-lightning,
-    sckit-learn,protobuf]
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "vero-metrics"
+version = "0.0.1"
+maintainers = [
+  { name="Vishal Srivastava", email="vishalsrivastava.vero@gmail.com" },
+    { name="Alakh Agarwal", email="alakhagarwal.vero@gmail.com" }
+]
+description = "The End-to-End LLM Evaluation Framework"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+repository = "https://github.com/Dark8203/vero-metrics"
+homepage = "https://vero.co.in"
+
+dependencies = ["torch",
+    "pandas",
+    "langgraph",
+    "langchain",
+    "transformers",
+    "numpy",
+    "langchain-openai",
+    "langchain-community",
+    "langchain-core",
+    "bert-score",
+    "rouge-score",
+    "tiktoken",
+    "tqdm",
+    "accelerate",
+    "sentencepiece",
+    "spacy",
+    "pytorch-lightning",
+    "sckit-learn",
+    "protobuf"]
 
