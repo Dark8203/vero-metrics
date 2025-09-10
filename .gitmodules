@@ -1,0 +1,5 @@
+[submodule "rag_code/rag_evaluation_components/alignscore"]
+	path = rag_code/rag_evaluation_components/alignscore
+[submodule "new_folder"]
+	path = new_folder
+	url = https://github.com/yuh-zha/AlignScore.git

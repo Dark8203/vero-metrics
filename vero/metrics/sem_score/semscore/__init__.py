@@ -1,0 +1,1 @@
+from .semscore import EmbeddingModelWrapper

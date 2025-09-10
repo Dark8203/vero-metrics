@@ -1,0 +1,61 @@
+from vero.metrics import MetricBase
+import numpy as np
+import math
+# from rag_code.tracing_components import logger
+
+def true_ranks(reranked_docs: list, ground_truth: list) -> list | None:
+    # logger.info('Calculating ranks...')
+    try:
+        ranks = []
+        for re_doc, truth in zip(reranked_docs, ground_truth):
+            s = []
+            for doc in re_doc:
+                if doc in truth:
+                    s.append(truth[doc])
+                else:
+                    s.append(0)
+            ranks.append(s)
+        return ranks
+    except Exception as e:
+        # logger.info('Exception occured during rank calculation\nError:', e)
+        return None
+
+
+class RerankerNDCG(MetricBase):
+    name = 'reranker_ndcg'
+
+    def __init__(self,reranked_docs: list, ground_truth: list, k:int=0):
+        self.reranked_docs = reranked_docs
+        self.ground_truth = ground_truth
+        self.k = k
+
+    # ndcg@k - standard for evaluating reranking
+    def evaluate(self) -> list | None:
+        # logger.info(f'Starting ndcg@k calculation...')
+        ranks = true_ranks(self.reranked_docs, self.ground_truth)
+        k = self.k
+        ndcg_k = []
+        try:
+            for rank in ranks:
+                dcg = 0
+                rank_s = sorted(rank, reverse=True)
+                if k != 0 and k < len(rank):
+                    rank = rank[:k]
+                for i in range(len(rank)):
+                    dcg += (2 ** (rank[i]) - 1) / math.log2(2 + i)
+                idcg = 0
+                if k != 0:
+                    limit = min(k, len(rank_s))
+                else:
+                    limit = len(rank_s)
+                for i in range(limit):
+                    idcg += (2 ** (rank_s[i]) - 1) / math.log2(2 + i)
+                if idcg == 0:
+                    ndcg_k.append(0)
+                else:
+                    ndcg_k.append(round((dcg / idcg), 2))
+
+            return ndcg_k
+        except Exception as e:
+            # logger.info('Exception occured during NDCG@k calculation\nError:', e)
+            return None
