@@ -1,0 +1,3 @@
+dependencies = [torchcuda,pandas,langgraph,langchain,transformers,numpy, langchain-openai, langchain-community, langchain-core,bert-score,rouge-score,tiktoken,tqdm,accelerate,sentencepiece,spacy,pytorch-lightning,
+    sckit-learn,protobuf]
+

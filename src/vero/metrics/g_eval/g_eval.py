@@ -4,8 +4,6 @@ import numpy as np
 from typing import Optional
 from openai import OpenAI
 import torch
-from dotenv import load_dotenv,find_dotenv
-load_dotenv(find_dotenv())
 # from tracing_components import logger
 
 
@@ -17,8 +15,8 @@ print(f"Using device: {device}")
 class GEvalScore(MetricBase):
     name = 'g_eval_score'
 
-    def __init__(self):
-        self.client = OpenAI()
+    def __init__(self,api_key:str):
+        self.client = OpenAI(api_key=api_key)
 
     def __enter__(self):
         return self
