@@ -1,17 +1,17 @@
 from src.vero.metrics import RecallScore, PrecisionScore, SufficiencyScore, CitationScore, MeanRR, MeanAP, RerankerNDCG, CumulativeNDCG
-from src.vero.metrics import OverlapScore, BertScore, RougeScore, SemScore, BartScore, BleurtScore, AlignScore, GEvalScore
+from src.vero.metrics import OverlapScore, BertScore, RougeScore, SemScore, BartScore, BleurtScore, AlignScore, GEvalScore, NumericalHallucinationScore
 
 
 ch_r=[1,2,3,5,6]
 ch_t=[2,3,4]
-# rs = RecallScore(ch_r,ch_t)
-# ps = PrecisionScore(ch_r,ch_t)
-# ss = SufficiencyScore(ch_r,ch_t)
-# cs = CitationScore(ch_r,ch_t)
-# print(rs.evaluate())
-# print(ps.evaluate())
-# print(ss.evaluate())
-# print(cs.evaluate())
+rs = RecallScore(ch_r,ch_t)
+ps = PrecisionScore(ch_r,ch_t)
+ss = SufficiencyScore(ch_r,ch_t)
+cs = CitationScore(ch_r,ch_t)
+print(rs.evaluate())
+print(ps.evaluate())
+print(ss.evaluate())
+print(cs.evaluate())
 #
 # rr = [[1,2,3,5,6],[1,2,3,5,6]]
 # gt = [[2,3,6],[2,3,6]]
@@ -45,8 +45,8 @@ chunks_list = df_new['Context'].apply(extract_page_content).tolist()
 answers_list = df_new['Answer'].tolist()
 
 # print("Processing SemScore...")
-# with SemScore() as sem_score:
-#     sem_results = [sem_score.evaluate(chunk, ans) for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
+with SemScore() as sem_score:
+    sem_results = [sem_score.evaluate(chunk, ans) for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
 # print(sem_results)
 #
 #

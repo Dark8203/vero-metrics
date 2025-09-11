@@ -6,22 +6,20 @@ import numpy as np
 pd.DataFrame()
 class PrecisionScore(MetricBase):
     '''
-    Calculates Precision Score.
+        Calculates Precision Score.
 
-    Parameters
-    ----------
-    chunks_retrieved: list
-        Pass the chunks retrieved.
-    chunks_true: list
-        Pass the true chunks for reference.
+        :param chunks_retrieved: Pass the chunks retrieved.
+        :param chunks_true: Pass the true chunks for reference.
 
-    Methods
-    ---------
-    __init__(chunks_retrieved, chunks_true)
-        Initializes the metric.
-    evaluate() -> float
-        Returns the precision score.
-    '''
+        Methods
+        ---------
+        1. __init__(chunks_retrieved, chunks_true)
+            Initializes the metric.
+        2. evaluate() -> float
+            Returns the precision score.
+
+        :returns: float
+        '''
 
     name = 'precision_score'
 

@@ -22,6 +22,22 @@ def true_ranks(reranked_docs: list, ground_truth: list) -> list | None:
 
 
 class RerankerNDCG(MetricBase):
+    '''
+        Implementation of NDCG@k for reranker performance measure.
+
+        :param reranked_docs: Pass the list of reranked documents list.
+        :param ground_truth: Pass the ground truth list for comparison.
+        :param k: Pass the value of k for NDCG.
+
+        Methods
+        ---------
+        1. __init__(reranked_docs, ground_truth, k)
+            Initializes the metric.
+        2. evaluate() -> list
+            Returns the ndcg@k score.
+
+        :returns: list
+        '''
     name = 'reranker_ndcg'
 
     def __init__(self,reranked_docs: list, ground_truth: list, k:int=0):

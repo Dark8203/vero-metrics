@@ -10,6 +10,19 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
 
 class RougeScore(MetricBase):
+    '''
+        Calculates ROUGEL Score which helps in measuring recall (focuses on the Longest Common Subsequence (LCS)).
+
+        Methods
+        ---------
+        1.  __init__()
+            Initializes the model for metric.
+
+        2. evaluate(reference,candidate) -> tuple
+            Returns the rouge score tuple which contains precision, recall and f1 score.
+
+        :returns: tuple
+        '''
     name = 'rouge_score'
 
     def __init__(self):
@@ -19,6 +32,12 @@ class RougeScore(MetricBase):
         return self
 
     def evaluate(self,reference: str | list, candidate: str | list) -> tuple | None:
+        '''
+        :param reference: Pass the chunks for reference.
+        :param candidate: Pass the answer that has to be checked.
+
+        :return: tuple
+        '''
         # logger.info('Starting ROUGE Score calculation')
         rg_scorer = self.rg_scorer
         try:

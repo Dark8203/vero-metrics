@@ -22,6 +22,21 @@ def true_ranks(reranked_docs: list, ground_truth: list) -> list | None:
 
 
 class CumulativeNDCG(MetricBase):
+    '''
+        Unique implementation of NDCG that can be used to evaluate the cumulative performance of retriever and reranker.
+
+        :param reranked_docs: Pass the list of reranked documents list.
+        :param ground_truth: Pass the ground truth list for comparison.
+
+        Methods
+        ---------
+        1. __init__(reranked_docs, ground_truth)
+            Initializes the metric.
+        2. evaluate() -> list
+            Returns the ndcg score.
+
+        :returns: list
+        '''
     name = 'cumulative_ndcg'
 
     def __init__(self,reranked_docs: list, ground_truth: list):

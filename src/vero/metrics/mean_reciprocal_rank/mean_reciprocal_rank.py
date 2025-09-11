@@ -5,6 +5,21 @@ import math
 
 
 class MeanRR(MetricBase):
+    '''
+        Implementation of MRR for reranker performance measure.
+
+        :param reranked_docs: Pass the list of reranked documents list.
+        :param ground_truth: Pass the ground truth list for comparison.
+
+        Methods
+        ---------
+        1. __init__(reranked_docs, ground_truth, k)
+            Initializes the metric.
+        2. evaluate() -> list
+            Returns the mrr score.
+
+        :returns: float
+        '''
     name = 'mean_reciprocal_rank'
 
     def __init__(self,reranked_docs: list, ground_truth: list):

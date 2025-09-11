@@ -10,6 +10,19 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
 
 class AlignScore(MetricBase):
+    '''
+        Calculates Align Score which is the measure of faithfulness.
+
+        Methods
+        ---------
+        1.  __init__()
+            Initializes the model for metric.
+
+        2. evaluate(reference,candidate) -> float
+            Returns the align score.
+
+        :returns: float
+    '''
     name = 'align_score'
 
     def __init__(self):
@@ -21,20 +34,26 @@ class AlignScore(MetricBase):
         return self
 
     # TODO: download model locally so that no connection error appears
-    def evaluate(self,ref: str | list, candidate: str | list) -> float | None:
+    def evaluate(self,reference: str | list, candidate: str | list) -> float | None:
+        '''
+        :param reference: Pass the chunks for reference.
+        :param candidate: Pass the answer that has to be checked.
+
+        :return: float
+        '''
         scorer = self.scorer
         try:
             # logger.info('Starting AlignScore calculation')
-            if isinstance(ref, str):
-                score = scorer.score(contexts=[ref], claims=[candidate])
+            if isinstance(reference, str):
+                score = scorer.score(contexts=[reference], claims=[candidate])
                 return round(score[0], 2)
-            elif isinstance(ref, list):
+            elif isinstance(reference, list):
                 score, avg_score = 0, 0
                 if isinstance(candidate, str):
                     candidate = [candidate]
-                for doc in ref:
+                for doc in reference:
                     score += scorer.score(contexts=[doc], claims=candidate)[0]
-                    avg_score = score / len(ref)
+                    avg_score = score / len(reference)
                 return round(avg_score, 2)
 
         except Exception as e:

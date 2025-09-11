@@ -4,6 +4,21 @@ import numpy as np
 
 #TODO: not right implementation, to be improved or changed
 class CitationScore(MetricBase):
+    '''
+        Calculates Citation Score.
+
+        :param chunks_cited: Pass the chunks cited.
+        :param chunks_true: Pass the true chunks for reference.
+
+        Methods
+        ---------
+        1. __init__(chunks_cited, chunks_true)
+            Initializes the metric.
+        2. evaluate() -> float
+            Returns the citation score.
+
+        :returns: float
+        '''
     name = 'citation_score'
 
     def __init__(self,chunks_cited:list, chunks_true:list, k=20):
@@ -11,7 +26,7 @@ class CitationScore(MetricBase):
         self.chunks_true = chunks_true
         self.k = k
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         if len(self.chunks_cited) == 0:
             return np.nan
 

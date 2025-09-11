@@ -3,15 +3,31 @@ import numpy as np
 import re
 
 class NumericalHallucinationScore(MetricBase):
+    '''
+        Calculates Numerical Hallucination Score.
+
+        :param answer: Pass the answer to be checked.
+        :param chunks_retrieved: Pass the chunks retrieved.
+        :param chunks: Optional: Pass the list of ids for the retrieved chunks.
+
+        Methods
+        ---------
+        1. __init__(chunks_retrieved, chunks_true)
+            Initializes the metric.
+        2. evaluate() -> float
+            Returns the numerical hallucination score.
+
+        :returns: float
+        '''
     name:str = 'numerical_hallucination_score'
 
-    def __init__(self, answer:str, chunks_retrieved:list|str, chunks=[], k=20):
+    def __init__(self, answer:str, chunks_retrieved:list|str, chunks:list =[], k=20):
         self.answer = answer
         self.chunks_retrieved = chunks_retrieved
         self.chunks = chunks
         self.k = k
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         ch_ret = self.chunks_retrieved[:self.k]
         s_true = ''  ## true numbers in retrieved chunks
         if len(self.chunks) > 0:

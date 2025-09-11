@@ -10,6 +10,19 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
 
 class SemScore(MetricBase):
+    '''
+        Calculates SEMScore which evaluates outputs by computing the semantic textual similarity between model output and gold reference using embedding.
+
+        Methods
+        ---------
+        1.  __init__()
+            Initializes the model for metric.
+
+        2. evaluate(reference,candidate) -> tuple
+            Returns the semscore.
+
+        :returns: float
+        '''
     name = 'sem_score'
 
     def __init__(self):

@@ -10,6 +10,20 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
 
 class BartScore(MetricBase):
+    '''
+        Calculates Bart Score which helps in comparing two different models/configurations.
+        Doesn't have significance on its own, it's a comparison score.
+
+        Methods
+        ---------
+        1.  __init__()
+            Initializes the model for metric.
+
+        2. evaluate(reference,candidate,batch_size) -> float
+            Returns the bart score.
+
+        :returns: float
+    '''
     name = 'bart_score'
 
     def __init__(self):
@@ -19,6 +33,14 @@ class BartScore(MetricBase):
         return self
 
     def evaluate(self,reference: str | list, candidate: str | list, batch_size: int = 4) -> float | None:
+        '''
+        :param reference: Pass the chunks for reference.
+        :param candidate: Pass the answer that has to be checked.
+        :param batch_size: Pass the number of samples to evaluate.
+
+        :returns: float
+        '''
+
         # logger.info('Starting Bart Score calculation')
         bart_scorer = self.bart_scorer
         score = 0

@@ -2,9 +2,24 @@ from vero.metrics import MetricBase
 import numpy as np
 
 class OverlapScore(MetricBase):
+    '''
+        Calculates the domain specific overlap score.
+
+        :param answer: Pass the answer.
+        :param key_terms: Pass the key terms for domain.
+
+        Methods
+        ---------
+        1. __init__(answer, key_terms)
+            Initializes the metric.
+        2. evaluate() -> list
+            Returns the overlap score.
+
+        :returns: float
+        '''
     name = 'overlap_score'
 
-    def __init__(self,answer:list, key_terms:list):
+    def __init__(self,answer:str, key_terms:list):
         self.answer = answer
         self.key_terms = key_terms
 
