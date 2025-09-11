@@ -1,6 +1,7 @@
 chroma_rag.db/
 venv/
 .venv1
+.venv
 .idea/
 !.idea/misc.xml
 !.idea/modules.xml
