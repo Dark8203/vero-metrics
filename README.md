@@ -9,45 +9,33 @@
 ## Project Structure
 ```
 .
-├── rag_code/
-|   ├── rag_pipelines/
-|   │   ├── rag.py          # Main RAG pipeline implementation
-|   │   ├── rag2.py         # Alternative RAG pipeline 1
-|   │   └── rag3.py         # Alternative RAG pipeline 2
-|   └── tracing_components/
-|   |   ├── rt_trace.py     # Contains the core logic for tracing RAG runs.
-|   |   ├── writer.py       # Handles writing the collected traces into the SQLite DB.
-|   |   ├── logger.py       # A utility for logging info to the terminal for debugging.
-|   |   └── vector_store.py # Run it once to push data into vector db
-|   └── rag_evaluation_components/
-|       ├── alignscore/                     # Package for alignscore
-|       ├── bartscore/                      # Package for bartscore
-|       ├── bert/                           # Package for bertscore
-|       ├── bleurt_pytorch/                 # Package for bleurtscore
-|       ├── semscore/                       # Package for semscore
-|       ├── rag_scoring_evaluation.py       # Contains all the fucntions and logic for actual evaluation(score) calculation for retriever and generator
-|       └── ranking_evaluation.py           # Contains logic and code for reranker evaluation
-└── main.py                 # Main file that acts as root for everything
-
+├── src/
+|   ├── vero/
+|   │   ├── metrics/         # Main package for metrics
+|   └── └──  all the metrics        # All the metrics are in here
+|            
+|   
+└── tests/
+    └── test_main.py/         # file for all the testing
 ```
 
 
 ## Deep Dive into metrics
 ### Generation Metrics
 #### BERTScore
- * Uses BERTScorer
- * Pass retrieved context and generated output
- * Returns precision, recall and f1-score
+ * Uses BERTScorer.
+ * Pass retrieved context and generated output.
+ * Returns precision, recall and f1-score.
 
 #### ROUGE-L
-* Uses ROUGE-L which focuses on the Longest Common Subsequence (LCS) between a generated summary and a reference summary
-* Pass retrieved context and generated output
-* Returns ROUGE score - precesion, recall and f1-score
+* Uses ROUGE-L which focuses on the Longest Common Subsequence (LCS) between a generated summary and a reference summary.
+* Pass retrieved context and generated output.
+* Returns ROUGE score - precesion, recall and f1-score.
 
 #### SEMScore
-* Uses embeddings of retrieved context and generated output and calculated cosine similarity between them
-* Pass retrieved context and generated output
-* Returns a single SEMScore
+* Uses embeddings of retrieved context and generated output and calculated cosine similarity between them.
+* Pass retrieved context and generated output.
+* Returns a single SEMScore.
   
 | SEMScore       | Inference     |
 | -------------- | ------------- |
@@ -56,15 +44,15 @@
 | negative score | semantically opposite |
 
 #### BleurtScore (Weighted Semantic Similarity)
-* A unique implementation of BluertScore where not only we calculate BluertScore but also perform weighted sum to give out the more nuanced score
-* With this implementation it can be pretty dynamic as it can be used as both generation and retriever metric
-   * As *generation metric* - it gives insights on which chunks play major part in output generation and they will recieve higher weights than others
-   * As *retriever metric* - it gives insights if their retriever is good at capturing conceptual and semantic relationships, even if it misses the exact answer
+* A unique implementation of BluertScore where not only we calculate BluertScore but also perform weighted sum to give out the more nuanced score.
+* With this implementation it can be pretty dynamic as it can be used as both generation and retriever metric.
+   * As *generation metric* - it gives insights on which chunks play major part in output generation and they will recieve higher weights than others.
+   * As *retriever metric* - it gives insights if their retriever is good at capturing conceptual and semantic relationships, even if it misses the exact answer.
      * It can be very useful for debugging, e.g.:
        * If Context Recall is low, but Weighted Semantic Similarity score is high, it tells the developer: "Your retriever is finding documents that are about the right topic, but it's failing to find the specific sentence or fact needed for the answer"
-       * If both scores are low, the retriever is failing at a more fundamental level
-* Pass retrieved context and generated output or user query
-* Returns a single weight BluertScore
+       * If both scores are low, the retriever is failing at a more fundamental level.
+* Pass retrieved context and generated output or user query.
+* Returns a single weight BluertScore.
 
 | BluertScore       | Inference     |
 | -------------- | ------------- |
@@ -73,8 +61,8 @@
 
 #### AlignScore
 * Measures the faithfulness of generated answer to the retrieved context.
-* Pass retrieved context and generated output
-* Returns a single AlignScore
+* Pass retrieved context and generated output.
+* Returns a single AlignScore.
 
 | AlignScore       | Inference     |
 | -------------- | ------------- |
@@ -82,9 +70,9 @@
 | closer to 0    | low factual consistency  |
 
 #### BartScore
-* Uses BartScorer and is a type of comparision score
-* Pass retrieved context and generated output
-* Returns a BartScore
+* Uses BartScorer and is a type of comparision score.
+* Pass retrieved context and generated output.
+* Returns a BartScore.
 * This score does not hold any meaning in itself, it can be used to compare two models or versions of RAG pipelines and comparision can done as - higher the score better the generation capabilites of that pipeline compared to another.
 
 #### G-Eval
@@ -94,23 +82,54 @@
 * Pass the references and candidate (optional : custom prompt, metric name, metric description, polling flag and polling number).
 * Returns a final G-Eval score for the passed metric or prompt.
 
+#### Domain Overlap Score
+ * Calculates the domain specific overlap score.
+ * Pass key terms and generated output.
+ * Returns overlap score.
+
+#### Numerical Hallucination Score
+ * Calculates Numerical Hallucination Score.
+ * Pass retrieved context and generated output.
+ * Returns hallucination score.
+
 ### Ranking Metrics
 #### Mean Reciprocal Rank (MRR)
-* Direct implementation of MRR
-* Pass the reranked docs along with ground truth
-* Returns MRR
+* Direct implementation of MRR.
+* Pass the reranked docs along with ground truth.
+* Returns MRR.
 
 #### Mean Average Precision (MAP)
-* Direct implementation of MAP
-* Pass the reranked docs along with ground truth
-* Returns MAP
+* Direct implementation of MAP.
+* Pass the reranked docs along with ground truth.
+* Returns MAP.
 
-#### NDCG@k
-* Direct implementation of NDCG@k
-* Pass the reranked docs along with ground truth and k value
-* Returns the NDCG@k
+#### Reranker NDCG@k
+* Direct implementation of NDCG@k.
+* Pass the reranked docs along with ground truth and k value.
+* Returns the NDCG@k.
 
-#### Modified NDCG@k
-* Unique implementation of NDCG@k that can be used to evaluate the cumulative performance of retriever and reranker
-* Pass the reranked docs along with ground truth and k value
-* Returns the NDCG@k
+#### Cumulative NDCG
+* Unique implementation of NDCG@k that can be used to evaluate the cumulative performance of retriever and reranker.
+* Pass the reranked docs along with ground truth.
+* Returns the NDCG.
+
+### Retrieval Metrics
+#### Precision Score
+* Calculates Precision Score.
+* Pass the retrieved context and the ground truth context.
+* Returns the context precision score.
+
+#### Recall Score
+* Calculates Recall Score.
+* Pass the retrieved context and the ground truth context.
+* Returns the context recall score.
+
+#### Context Sufficiency Score
+* Calculates the sufficiency score of retrieved context for the user query.
+* Uses LLM to score the metric.
+* Returns the context sufficiency score.
+
+#### Citation Score
+* Calculates Citation Score of the retrieved context.
+* Pass the cited context and ground truth citations.
+* Returns the citation score.
