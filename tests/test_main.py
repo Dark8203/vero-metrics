@@ -45,9 +45,9 @@ chunks_list = df_new['Context'].apply(extract_page_content).tolist()
 answers_list = df_new['Answer'].tolist()
 
 # print("Processing SemScore...")
-with SemScore() as sem_score:
-    sem_results = [sem_score.evaluate(chunk, ans) for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
-# print(sem_results)
+# with SemScore() as sem_score:
+#     sem_results = [sem_score.evaluate(chunk, ans) for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
+# # print(sem_results)
 #
 #
 # print("\nProcessing BERT Score...")

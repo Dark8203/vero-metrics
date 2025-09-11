@@ -36,7 +36,7 @@ class BartScore(MetricBase):
         '''
         :param reference: Pass the chunks for reference.
         :param candidate: Pass the answer that has to be checked.
-        :param batch_size: Pass the number of samples to evaluate.
+        :param batch_size: Pass the number of samples to evaluate. (Optional)
 
         :returns: float
         '''

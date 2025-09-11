@@ -32,6 +32,12 @@ class SemScore(MetricBase):
         return self
 
     def evaluate(self,reference: str | list, candidate: str | list) -> float | None:
+        '''
+        :param reference: Pass the reference chunks.
+        :param candidate: Pass the answer.
+
+        :return: float
+        '''
         # logger.info('Starting SEMscore calculation')
         em = self.em
         try:
