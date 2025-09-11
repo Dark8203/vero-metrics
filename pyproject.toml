@@ -19,11 +19,6 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
-
-[project.urls]
-repository = "https://github.com/Dark8203/vero-eval"
-homepage = "https://vero.co.in"
-
 dependencies = ["torch",
     "pandas",
     "langgraph",
@@ -44,3 +39,6 @@ dependencies = ["torch",
     "sckit-learn",
     "protobuf"]
 
+[project.urls]
+repository = "https://github.com/Dark8203/vero-eval"
+homepage = "https://vero.co.in"
