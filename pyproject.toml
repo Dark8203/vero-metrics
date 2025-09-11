@@ -42,3 +42,6 @@ dependencies = ["torch",
 [project.urls]
 repository = "https://github.com/Dark8203/vero-eval"
 homepage = "https://vero.co.in"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vero"]
