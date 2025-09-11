@@ -70,10 +70,10 @@ with SemScore() as sem_score:
 # with BartScore() as bart_score:
 #     score = [bart_score.evaluate(chunk, ans) for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
 # print(score)
-
-print("Processing BLUERTScore...")
-with BleurtScore() as bleurt:
-    bl_results = [bleurt.evaluate(chunk, ans) for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
+#
+# print("Processing BLUERTScore...")
+# with BleurtScore() as bleurt:
+#     bl_results = [bleurt.evaluate(chunk, ans) for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
 # print(bl_results)
 
 #TODO: Figure this out
