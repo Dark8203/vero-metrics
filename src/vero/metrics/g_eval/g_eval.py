@@ -13,6 +13,18 @@ print(f"Using device: {device}")
 
 #TODO:expose openai client for model config
 class GEvalScore(MetricBase):
+    '''
+        A unique implementation of g-eval.
+
+        :param api_key: Pass the api key for OpenAI client.
+
+        Methods
+        ---------
+        1. __init__(api_key)
+            Initializes the client.
+        2. evaluate() -> float
+            Returns the recall score.
+        '''
     name = 'g_eval_score'
 
     def __init__(self,api_key:str):
@@ -22,7 +34,19 @@ class GEvalScore(MetricBase):
         return self
 
     # tiktoken for tokens, extracting logits
-    def evaluate(self,ref, candidate, metric, metric_description:str =None, rubric :str =None, custom_prompt: Optional[str] = None, polling: bool = False, polling_calls: int = 5) -> float | None:
+    def evaluate(self,reference, candidate, metric, metric_description:str =None, rubric :str =None, custom_prompt: Optional[str] = None, polling: bool = False, polling_calls: int = 5) -> float | None:
+        '''
+        :param reference: Pass the reference chunks.
+        :param candidate: Pass the answer.
+        :param metric: Pass the metric.
+        :param metric_description: Pass the metric description. (Optional)
+        :param rubric: Pass the rubric. (Optional)
+        :param custom_prompt: Pass the custom prompt. (Optional)
+        :param polling: Pass if polling is enabled. (Optional)
+        :param polling_calls: Pass the number of polling calls. (Optional)
+
+        :return: float
+        '''
         client = self.client
         if rubric is None:
             rubric = '1 to 5; 1 being worst and 5 being best'
@@ -67,7 +91,7 @@ class GEvalScore(MetricBase):
                     messages=[{'role': 'user', 'content': meta_prompt}],
                 )
                 prompt = prompt_call.choices[0].message.content
-                prompt = prompt.format(ref=ref, candidate=candidate)
+                prompt = prompt.format(ref=reference, candidate=candidate)
                 print(prompt)
             else:
                 prompt = custom_prompt
