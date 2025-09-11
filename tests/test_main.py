@@ -1,18 +1,18 @@
-from src.vero.metrics import RecallScore, PrecisionScore, SufficiencyScore, CitationScore, MeanRR, MeanAP, RerankerNDCG, CumulativeNDCG
-from src.vero.metrics import OverlapScore, BertScore, RougeScore, SemScore, BartScore, BleurtScore, AlignScore, GEvalScore, NumericalHallucinationScore
-
-
-ch_r=[1,2,3,5,6]
-ch_t=[2,3,4]
-rs = RecallScore(ch_r,ch_t)
-ps = PrecisionScore(ch_r,ch_t)
-ss = SufficiencyScore(ch_r,ch_t)
-cs = CitationScore(ch_r,ch_t)
-print(rs.evaluate())
-print(ps.evaluate())
-print(ss.evaluate())
-print(cs.evaluate())
+# from src.vero.metrics import RecallScore, PrecisionScore, SufficiencyScore, CitationScore, MeanRR, MeanAP, RerankerNDCG, CumulativeNDCG
+# from src.vero.metrics import OverlapScore, BertScore, RougeScore, SemScore, BartScore, BleurtScore, AlignScore, GEvalScore, NumericalHallucinationScore
 #
+#
+# ch_r=[1,2,3,5,6]
+# ch_t=[2,3,4]
+# rs = RecallScore(ch_r,ch_t)
+# ps = PrecisionScore(ch_r,ch_t)
+# ss = SufficiencyScore(ch_r,ch_t)
+# cs = CitationScore(ch_r,ch_t)
+# print(rs.evaluate())
+# print(ps.evaluate())
+# print(ss.evaluate())
+# print(cs.evaluate())
+# #
 # rr = [[1,2,3,5,6],[1,2,3,5,6]]
 # gt = [[2,3,6],[2,3,6]]
 # ranks = [{2: 2, 3: 2},{2: 2, 3: 2, 6: 1}]
@@ -30,19 +30,19 @@ print(cs.evaluate())
 # os = OverlapScore(ans,kt)
 # print(os.evaluate())
 
-
-import re
-import pandas as pd
-from tqdm import tqdm
-import torch
-
-def extract_page_content(text_blob):
-    pattern = r"page_content='(.*?)'"
-    matches = re.findall(pattern, text_blob)
-    return matches
-df_new = pd.read_csv(r'C:\Users\HP\PycharmProjects\PythonProject2\rag_code\testing.csv')
-chunks_list = df_new['Context'].apply(extract_page_content).tolist()
-answers_list = df_new['Answer'].tolist()
+#
+# import re
+# import pandas as pd
+# from tqdm import tqdm
+# import torch
+#
+# def extract_page_content(text_blob):
+#     pattern = r"page_content='(.*?)'"
+#     matches = re.findall(pattern, text_blob)
+#     return matches
+# df_new = pd.read_csv(r'testing.csv')
+# chunks_list = df_new['Context'].apply(extract_page_content).tolist()
+# answers_list = df_new['Answer'].tolist()
 
 # print("Processing SemScore...")
 # with SemScore() as sem_score:
