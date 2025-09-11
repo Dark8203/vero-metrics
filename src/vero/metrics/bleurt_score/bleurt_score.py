@@ -12,6 +12,19 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
 
 class BleurtScore(MetricBase):
+    '''
+        A unique implementation of BluertScore.
+
+        Methods
+        ---------
+        1.  __init__()
+            Initializes the models for metric.
+
+        2. evaluate(reference,candidate) -> float
+            Returns the bleurt score.
+
+        :returns: float
+    '''
     name = 'bleurt_score'
 
     def __init__(self):
@@ -31,6 +44,12 @@ class BleurtScore(MetricBase):
     # bleurtscore - https://g.co/gemini/share/058b7af18115
 
     def evaluate(self,reference: str | list, candidate: str | list) -> float | None:
+        '''
+        :param reference: Pass the reference chunks.
+        :param candidate: Pass the answer.
+
+        :return: float
+        '''
         bleurt_model = self.bleurt_model
         bleurt_tokenizer = self.bleurt_tokenizer
         bert_tokenizer = self.bert_tokenizer
