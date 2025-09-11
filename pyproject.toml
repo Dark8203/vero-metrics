@@ -7,8 +7,8 @@ build-backend = "hatchling.build"
 name = "vero-eval"
 version = "0.0.1"
 maintainers = [
-  { name="Vishal Srivastava", email="vishalsrivastava.vero@gmail.com" },
-    { name="Alakh Agarwal", email="alakhagarwal.vero@gmail.com" }
+  { name="Vishal Srivastava", email="vishalsrivastava8203@gmail.com" },
+    { name="Alakh Agarwal", email="alakhagr@gmail.com" }
 ]
 description = "The End-to-End LLM Evaluation Framework"
 readme = "README.md"
@@ -21,7 +21,7 @@ license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
 [project.urls]
-repository = "https://github.com/Dark8203/vero-metrics"
+repository = "https://github.com/Dark8203/vero-eval"
 homepage = "https://vero.co.in"
 
 dependencies = ["torch",
