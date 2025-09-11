@@ -23,7 +23,7 @@ class GEvalScore(MetricBase):
         1. __init__(api_key)
             Initializes the client.
         2. evaluate() -> float
-            Returns the recall score.
+            Returns the g-eval score.
         '''
     name = 'g_eval_score'
 
