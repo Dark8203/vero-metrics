@@ -8,7 +8,7 @@ name = "vero-eval"
 version = "0.0.1"
 maintainers = [
   { name="Vishal Srivastava", email="vishalsrivastava8203@gmail.com" },
-    { name="Alakh Agarwal", email="alakhagr@gmail.com" }
+    { name="Alakh Agrawal", email="alakhagr@gmail.com" }
 ]
 description = "The End-to-End LLM Evaluation Framework"
 readme = "README.md"
@@ -36,7 +36,7 @@ dependencies = ["torch",
     "sentencepiece",
     "spacy",
     "pytorch-lightning",
-    "sckit-learn",
+    "scikit-learn",
     "protobuf"]
 
 [project.urls]
